@@ -38,7 +38,16 @@ module.exports = {
       test: /\.jsx?$/,
       loaders: ['babel'],
       exclude: /node_modules/,
-      include: [path.join(__dirname, 'src'),path.join(__dirname, 'model')]
+      include: [path.join(__dirname, 'src'),path.join(__dirname, 'model')],
+      query: {
+        cacheDirectory: true,
+        plugins: [
+          "transform-runtime",
+          "transform-decorators-legacy", 
+          "react-hot-loader/babel"
+        ],
+        presets: ['es2015', 'react', 'stage-0']
+      },
     }
     , {
       test: /\.css$/,

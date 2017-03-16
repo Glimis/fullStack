@@ -6,16 +6,21 @@ import {db} from '../config'
 import mongoose from 'mongoose'
 mongoose.connect(db.uri, db.opts);
 
+
+import Type from '../model/Type'
 export default function(app){
-    global.M={};
+   
      //注入所有模型
     fs.readdirSync(modelDir).forEach(function (name) {
       name=name.slice(0,name.length-3);
       name=name.toLowerCase();
-      console.log('name',name,path.join(modelDir, name))
       if(name!='index'&&name!='default'){
+        console.log('name',name)
+        if(name=='type') return;
         var model=require(path.join(modelDir, name)).default;
         app.use("/"+name, new model().toRouter());
       }
     })
+
+    app.use("/type",Type)
 }

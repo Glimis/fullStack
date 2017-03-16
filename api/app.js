@@ -5,9 +5,9 @@ import bodyParser from 'body-parser'
 import cookieSession from 'cookie-session'
 import {cs,port} from './config'
 import registerModel from './common/registerModel'
-
 var  app = express();
- 
+ global.M=global.M||{};
+
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(logger('dev'));
